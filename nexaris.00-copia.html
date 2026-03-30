@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXARIS Consulting</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --ink:      #0f1a12;
+  --ink2:     #1c2e21;
+  --ink3:     #243529;
+  --navy:     #0e1e35;
+  --navy2:    #152540;
+  --forest:   #1e4a2e;
+  --sage:     #4a7c59;
+  --mint:     #7fb893;
+  --mist:     #b8d4c0;
+  --paper:    #f2f5f0;
+  --paper2:   #e8ede5;
+  --white:    #ffffff;
+  --azure:    #2a5298;
+  --azure-lt: #3a6abf;
+  --mono:     #8aab94;
+  --dim:      #5a7a63;
+  --border:   rgba(74,124,89,0.15);
+  --border2:  rgba(74,124,89,0.28);
+  --line:     rgba(74,124,89,0.1);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.6;
+  cursor: auto;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--sage); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 500;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(242,245,240,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: height .25s, background .25s;
+}
+nav.scrolled { height: 54px; background: rgba(242,245,240,0.97); }
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--ink);
+}
+.logo-sq {
+  width: 30px; height: 30px;
+  background: var(--forest);
+  display: grid; place-items: center;
+}
+.logo-sq span {
+  font-family: 'DM Mono', monospace;
+  font-size: .75rem; font-weight: 500; color: var(--mist);
+  letter-spacing: -.02em;
+}
+.logo-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem; letter-spacing: .04em; color: var(--ink);
+}
+.nav-center { display: flex; gap: 32px; list-style: none; }
+.nav-center a {
+  font-size: .78rem; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--dim);
+  text-decoration: none; transition: color .18s;
+}
+.nav-center a:hover { color: var(--forest); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .76rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  padding: 8px 20px; background: var(--forest); color: var(--mist);
+  text-decoration: none; transition: all .2s; border: none; cursor: pointer;
+}
+.nav-btn:hover { background: var(--sage); color: white; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 64px;
+}
+.hero-left {
+  background: var(--ink);
+  padding: 80px 56px 80px 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.hero-left::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--sage), var(--azure), transparent);
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: 40px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before { content: '—'; color: var(--forest); }
+.hero-h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 5.5vw, 5.8rem);
+  line-height: .95; color: var(--paper);
+  letter-spacing: -.02em;
+}
+.hero-h1 em { font-style: italic; color: var(--mint); }
+.hero-sub {
+  font-size: .95rem; font-weight: 300; line-height: 1.8;
+  color: var(--mono); max-width: 400px;
+  margin: 36px 0 48px;
+}
+.hero-actions { display: flex; gap: 12px; align-items: center; }
+.btn-solid {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+  padding: 13px 28px; background: var(--sage); color: white;
+  text-decoration: none; transition: all .2s; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-solid:hover { background: var(--mint); color: var(--ink); }
+.btn-line {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+  padding: 12px 24px; background: transparent; color: var(--mono);
+  border: 1px solid rgba(74,124,89,.35); text-decoration: none;
+  transition: all .2s; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-line:hover { border-color: var(--sage); color: var(--mint); }
+.hero-numbers {
+  display: flex; gap: 40px; padding-top: 48px;
+  border-top: 1px solid rgba(74,124,89,.15);
+}
+.hero-num { display: flex; flex-direction: column; gap: 4px; }
+.hero-num-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem; color: var(--mist); line-height: 1;
+}
+.hero-num-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sage);
+}
+
+.hero-right {
+  background: var(--navy);
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.hero-right-top {
+  flex: 1; padding: 80px 48px 40px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(42,82,152,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42,82,152,.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.hero-card {
+  position: relative; z-index: 1;
+  border: 1px solid rgba(42,82,152,.3);
+  background: rgba(14,30,53,.6);
+  padding: 32px;
+  backdrop-filter: blur(4px);
+}
+.hero-card-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--azure-lt); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-card-tag::before {
+  content: ''; width: 20px; height: 1px; background: var(--azure-lt);
+}
+.hero-card-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.hero-card-list li {
+  font-size: .86rem; color: #a0b8d4;
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px; border-bottom: 1px solid rgba(42,82,152,.15);
+}
+.hero-card-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.hero-card-list li::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--azure-lt); flex-shrink: 0;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+.hero-right-bottom {
+  padding: 28px 48px;
+  border-top: 1px solid rgba(42,82,152,.2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.hero-tag-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.htag {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 10px; border: 1px solid rgba(42,82,152,.25);
+  color: rgba(160,184,212,.6);
+}
+
+/* ── TICKER ── */
+.ticker {
+  background: var(--forest); padding: 12px 0; overflow: hidden;
+  border-top: 1px solid rgba(74,124,89,.2); border-bottom: 1px solid rgba(74,124,89,.2);
+}
+.ticker-track {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: ticker 36s linear infinite;
+}
+.ticker-track span {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--mist); padding: 0 28px;
+}
+.ticker-track span.sep { color: var(--sage); padding: 0; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SECTIONS SHARED ── */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--sage); display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.section-label::after { content: ''; flex: 0 0 24px; height: 1px; background: var(--sage); }
+.section-h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.05; letter-spacing: -.01em;
+  color: var(--ink); margin-bottom: 20px;
+}
+.section-h2 em { font-style: italic; color: var(--forest); }
+.section-lead {
+  font-size: .96rem; font-weight: 300; line-height: 1.85;
+  color: var(--dim); max-width: 480px;
+}
+
+/* ── ABOUT ── */
+#sobre {
+  padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+}
+.sobre-left {
+  background: var(--white);
+  padding: 80px 56px 80px 48px;
+  border-right: 1px solid var(--border);
+}
+.sobre-text {
+  font-size: .95rem; font-weight: 300; line-height: 1.9;
+  color: var(--dim); margin: 28px 0 36px;
+}
+.sobre-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.sobre-pill {
+  font-size: .74rem; font-weight: 500; letter-spacing: .04em;
+  padding: 6px 14px;
+  background: var(--paper2); color: var(--forest);
+  border: 1px solid var(--border2);
+  transition: all .18s;
+}
+.sobre-pill:hover { background: var(--forest); color: var(--mist); }
+
+.sobre-right {
+  background: var(--ink2);
+  padding: 80px 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.sobre-values { display: flex; flex-direction: column; gap: 0; }
+.sobre-val-item {
+  padding: 22px 0; border-bottom: 1px solid rgba(74,124,89,.12);
+  display: grid; grid-template-columns: 32px 1fr;
+  gap: 16px; align-items: start;
+}
+.sobre-val-item:first-child { padding-top: 0; }
+.sobre-val-num {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .1em; color: var(--sage);
+  padding-top: 3px;
+}
+.sobre-val-text strong {
+  display: block; font-size: .9rem; font-weight: 500;
+  color: var(--mist); margin-bottom: 4px;
+}
+.sobre-val-text span { font-size: .82rem; color: var(--mono); line-height: 1.6; }
+
+/* ── SOLUTIONS ── */
+#solucoes {
+  background: var(--paper2);
+  padding: 96px 48px;
+}
+.sol-top {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 56px; flex-wrap: wrap; gap: 24px;
+}
+.sol-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border2);
+}
+.sol-item {
+  padding: 36px 32px;
+  border-right: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+  background: var(--white);
+  transition: background .22s;
+  position: relative; overflow: hidden;
+}
+.sol-item:nth-child(3n) { border-right: none; }
+.sol-item:nth-child(4),.sol-item:nth-child(5),.sol-item:nth-child(6) { border-bottom: none; }
+.sol-item:hover { background: var(--ink); }
+.sol-item:hover .sol-n,
+.sol-item:hover .sol-h3,
+.sol-item:hover .sol-p { color: var(--mist); }
+.sol-item:hover .sol-h3 { color: var(--mint); }
+.sol-item:hover .sol-more { color: var(--mint); }
+.sol-n {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem; letter-spacing: .14em; color: var(--sage);
+  margin-bottom: 20px; transition: color .22s;
+}
+.sol-h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.22rem; color: var(--ink);
+  margin-bottom: 12px; line-height: 1.2;
+  transition: color .22s;
+}
+.sol-p { font-size: .84rem; color: var(--dim); line-height: 1.7; transition: color .22s; }
+.sol-more {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 20px; font-size: .74rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--sage); text-decoration: none;
+  transition: gap .18s, color .22s;
+}
+.sol-more:hover { gap: 12px; }
+
+/* ── SETORES ── */
+#setores {
+  background: var(--navy);
+  padding: 80px 48px;
+}
+#setores .section-label { color: var(--azure-lt); }
+#setores .section-label::after { background: var(--azure-lt); }
+#setores .section-h2 { color: var(--paper); }
+#setores .section-h2 em { color: var(--mint); }
+.setores-grid {
+  margin-top: 48px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: rgba(42,82,152,.2);
+  border: 1px solid rgba(42,82,152,.2);
+}
+.setor-item {
+  background: var(--navy2);
+  padding: 28px 24px;
+  cursor: pointer;
+  transition: background .2s;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.setor-item:hover, .setor-item.act { background: var(--navy); border-left: 2px solid var(--azure-lt); }
+.setor-icon { font-size: 1.4rem; }
+.setor-name {
+  font-size: .85rem; font-weight: 500; color: #a0b8d4;
+  line-height: 1.3; transition: color .2s;
+}
+.setor-item:hover .setor-name, .setor-item.act .setor-name { color: var(--mint); }
+.setor-tag-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(42,82,152,.6); transition: color .2s;
+}
+.setor-item:hover .setor-tag-lbl, .setor-item.act .setor-tag-lbl { color: var(--azure-lt); }
+
+/* ── INSIGHTS ── */
+#insights {
+  background: var(--white);
+  padding: 96px 48px;
+}
+.ins-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+.ins-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border2);
+}
+.ins-featured {
+  background: var(--white); padding: 0;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  transition: background .2s;
+}
+.ins-featured:hover { background: var(--paper); }
+.ins-img {
+  height: 240px; background: var(--ink2);
+  display: grid; place-items: center; font-size: 3.5rem;
+  position: relative; overflow: hidden;
+}
+.ins-img-tag {
+  position: absolute; top: 20px; left: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  padding: 5px 10px; background: var(--forest); color: var(--mist);
+}
+.ins-body { padding: 32px; flex: 1; display: flex; flex-direction: column; }
+.ins-cat {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: 12px;
+}
+.ins-h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.55rem; line-height: 1.15; color: var(--ink);
+  margin-bottom: 12px; letter-spacing: -.01em;
+}
+.ins-excerpt { font-size: .86rem; color: var(--dim); line-height: 1.75; }
+.ins-meta {
+  margin-top: auto; padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+  font-size: .75rem; color: var(--mono);
+  font-family: 'DM Mono', monospace;
+}
+.ins-stack { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+.ins-small {
+  background: var(--white); padding: 28px 28px;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  transition: background .2s; flex: 1;
+}
+.ins-small:hover { background: var(--paper); }
+.ins-small .ins-h3 { font-size: 1.08rem; }
+
+/* ── SOCIAL ── */
+#social {
+  background: var(--paper2);
+  padding: 80px 48px;
+}
+.social-top-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+.soc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.soc-card {
+  background: var(--white); padding: 28px 24px;
+  border: 1px solid var(--border2);
+  display: flex; flex-direction: column; gap: 16px;
+  text-decoration: none; color: inherit;
+  transition: all .22s; position: relative; overflow: hidden;
+}
+.soc-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .28s;
+}
+.soc-card:nth-child(1)::before { background: var(--azure); }
+.soc-card:nth-child(2)::before { background: var(--ink); }
+.soc-card:nth-child(3)::before { background: var(--sage); }
+.soc-card:nth-child(4)::before { background: #ff0000; }
+.soc-card:hover::before { transform: scaleX(1); }
+.soc-card:hover { border-color: var(--border2); box-shadow: 0 4px 24px rgba(0,0,0,.06); }
+.soc-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.soc-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem; color: var(--ink);
+}
+.soc-count { text-align: right; }
+.soc-count strong {
+  display: block; font-family: 'DM Mono', monospace;
+  font-size: 1.1rem; color: var(--forest); font-weight: 500;
+}
+.soc-count span { font-size: .68rem; color: var(--mono); letter-spacing: .06em; font-family: 'DM Mono', monospace; }
+.soc-desc { font-size: .82rem; color: var(--dim); line-height: 1.6; }
+.soc-handle {
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem; letter-spacing: .06em; color: var(--sage);
+}
+.soc-thumbs { display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; }
+.soc-th { aspect-ratio: 1; background: var(--paper2); }
+.soc-th:nth-child(1) { background: linear-gradient(135deg,rgba(46,107,79,.18),rgba(14,30,53,.12)); }
+.soc-th:nth-child(2) { background: linear-gradient(135deg,rgba(14,30,53,.15),rgba(46,107,79,.1)); }
+.soc-th:nth-child(3) { background: rgba(74,124,89,.1); }
+
+.newsletter {
+  margin-top: 40px; padding: 40px 48px;
+  background: var(--ink); display: flex;
+  align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+  border-left: 4px solid var(--sage);
+}
+.newsletter-txt h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem; color: var(--paper); margin-bottom: 6px;
+}
+.newsletter-txt h3 em { font-style: italic; color: var(--mint); }
+.newsletter-txt p { font-size: .85rem; color: var(--mono); }
+.newsletter-form { display: flex; gap: 0; }
+.newsletter-form input {
+  padding: 12px 18px; background: var(--ink2);
+  border: 1px solid rgba(74,124,89,.25); border-right: none;
+  color: var(--paper); font-size: .85rem; outline: none;
+  width: 260px; font-family: inherit; transition: border-color .18s;
+}
+.newsletter-form input:focus { border-color: var(--sage); }
+.newsletter-form input::placeholder { color: var(--mono); }
+.newsletter-form button {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .76rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+  padding: 12px 22px; background: var(--sage); color: white;
+  border: none; cursor: pointer; transition: background .18s;
+  white-space: nowrap;
+}
+.newsletter-form button:hover { background: var(--mint); color: var(--ink); }
+
+/* ── CONTACT ── */
+#contactos {
+  padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+}
+.contact-left {
+  background: var(--forest);
+  padding: 80px 56px 80px 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.contact-left .section-label { color: var(--mist); }
+.contact-left .section-label::after { background: var(--mist); }
+.contact-left .section-h2 { color: var(--paper); }
+.contact-left .section-h2 em { color: var(--mint); }
+.contact-left .section-lead { color: var(--mist); }
+.contact-details { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+.c-detail {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px 0; border-bottom: 1px solid rgba(184,212,192,.15);
+}
+.c-detail:first-child { padding-top: 0; }
+.c-icon {
+  width: 36px; height: 36px; background: rgba(184,212,192,.1);
+  display: grid; place-items: center; font-size: .9rem;
+  flex-shrink: 0;
+}
+.c-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--mist); margin-bottom: 3px; opacity: .65;
+}
+.c-val { font-size: .88rem; color: var(--mist); font-weight: 400; }
+
+.contact-right {
+  background: var(--white);
+  padding: 80px 56px 80px 48px;
+}
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.f-group { display: flex; flex-direction: column; gap: 5px; }
+.f-group label {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--dim);
+}
+.f-group input, .f-group textarea, .f-group select {
+  padding: 11px 14px;
+  background: var(--paper2); border: 1px solid var(--border2);
+  color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: .88rem;
+  outline: none; transition: border-color .18s, background .18s;
+  appearance: none;
+}
+.f-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a7c59'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  background-color: var(--paper2); cursor: pointer;
+}
+.f-group select option { background: white; }
+.f-group input:focus, .f-group textarea:focus, .f-group select:focus {
+  border-color: var(--sage); background: var(--white);
+}
+.f-group input::placeholder, .f-group textarea::placeholder { color: var(--mono); }
+.f-group textarea { resize: vertical; min-height: 110px; }
+
+/* RGPD notice */
+.rgpd-note {
+  background: rgba(42,82,152,.06); border-left: 3px solid var(--azure-lt);
+  padding: 12px 14px; font-size: .78rem; color: var(--dim); line-height: 1.6;
+}
+.rgpd-note a { color: var(--azure); text-decoration: none; }
+.rgpd-note a:hover { text-decoration: underline; }
+
+/* consent checkbox */
+.consent-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .79rem; color: var(--dim); line-height: 1.55;
+}
+.consent-row input[type="checkbox"] {
+  width: 16px; height: 16px; flex-shrink: 0;
+  accent-color: var(--sage); cursor: pointer; margin-top: 2px;
+}
+.consent-row label { cursor: pointer; }
+.consent-row a { color: var(--forest); text-decoration: none; }
+.consent-row a:hover { text-decoration: underline; }
+
+/* captcha */
+.captcha-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: var(--paper2);
+  border: 1px solid var(--border2);
+}
+.cap-left { display: flex; align-items: center; gap: 10px; }
+.cap-box {
+  width: 20px; height: 20px; border: 1.5px solid var(--sage);
+  background: white; display: grid; place-items: center;
+  cursor: pointer; transition: all .18s; position: relative;
+}
+.cap-box.checking { border-color: var(--azure); }
+.cap-box.checked { background: var(--sage); border-color: var(--sage); }
+.cap-spinner {
+  width: 12px; height: 12px;
+  border: 2px solid rgba(74,124,89,.2); border-top-color: var(--azure);
+  border-radius: 50%; animation: spin .6s linear infinite; display: none;
+}
+@keyframes spin { to{transform:rotate(360deg)} }
+.cap-box.checking .cap-spinner { display: block; }
+.cap-tick { display: none; }
+.cap-box.checked .cap-tick { display: block; }
+.cap-box.checking .cap-tick { display: none; }
+.cap-label {
+  font-size: .82rem; font-weight: 500; color: var(--ink);
+  cursor: pointer; user-select: none;
+}
+.cap-label.done { color: var(--forest); }
+.cap-brand {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem; letter-spacing: .08em; color: var(--mono);
+  text-align: right; display: flex; flex-direction: column; gap: 2px;
+}
+
+.btn-submit {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .8rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  padding: 15px 28px; background: var(--forest); color: var(--mist);
+  border: none; cursor: pointer; transition: all .2s; width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.btn-submit:hover:not(:disabled) { background: var(--sage); color: white; }
+.btn-submit:disabled { opacity: .35; cursor: not-allowed; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 64px 48px 36px;
+}
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px; padding-bottom: 48px;
+  border-bottom: 1px solid rgba(74,124,89,.12);
+}
+.footer-brand .logo-name { color: var(--mist); font-size: 1.3rem; }
+.footer-brand .logo-sq { background: var(--forest); }
+.footer-brand p {
+  font-size: .83rem; color: var(--mono); line-height: 1.8;
+  margin: 16px 0 24px; max-width: 220px;
+}
+.footer-soc { display: flex; gap: 8px; }
+.footer-soc a {
+  width: 32px; height: 32px; border: 1px solid rgba(74,124,89,.2);
+  display: grid; place-items: center;
+  font-family: 'DM Serif Display', serif; font-size: .78rem;
+  color: var(--mono); text-decoration: none;
+  transition: all .18s;
+}
+.footer-soc a:hover { border-color: var(--sage); color: var(--mint); }
+.footer-col h4 {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: .83rem; color: var(--mono); text-decoration: none; transition: color .18s; }
+.footer-col a:hover { color: var(--mint); }
+.footer-bottom {
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem; letter-spacing: .06em; color: var(--sage);
+}
+.footer-bottom a { color: var(--sage); text-decoration: none; }
+.footer-bottom a:hover { color: var(--mint); }
+
+/* ── COOKIE BANNER ── */
+#cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+  transform: translateY(100%);
+  transition: transform .45s cubic-bezier(.16,1,.3,1);
+  background: var(--ink2);
+  border-top: 1px solid rgba(74,124,89,.25);
+  box-shadow: 0 -8px 40px rgba(0,0,0,.18);
+}
+#cookie-banner.show { transform: translateY(0); }
+.cb-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 20px 48px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.cb-ico { font-size: 1.3rem; flex-shrink: 0; }
+.cb-txt { flex: 1; min-width: 220px; }
+.cb-txt strong {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem; color: var(--mist); display: block; margin-bottom: 3px;
+}
+.cb-txt p { font-size: .79rem; color: var(--mono); line-height: 1.55; }
+.cb-txt a { color: var(--mint); text-decoration: none; }
+.cb-btns { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; }
+.cb-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .73rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+  padding: 9px 18px; border: none; cursor: pointer; transition: all .18s;
+}
+.cb-accept { background: var(--sage); color: white; }
+.cb-accept:hover { background: var(--mint); color: var(--ink); }
+.cb-reject { background: transparent; color: var(--mono); border: 1px solid rgba(74,124,89,.3); }
+.cb-reject:hover { color: var(--mist); border-color: var(--mono); }
+.cb-config { background: transparent; color: var(--mint); border: 1px solid rgba(74,124,89,.3); }
+.cb-config:hover { border-color: var(--mint); }
+
+/* COOKIE MODAL */
+#cookie-modal {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(15,26,18,.8); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .28s;
+}
+#cookie-modal.open { opacity: 1; pointer-events: all; }
+.cm-box {
+  background: var(--white); width: 100%; max-width: 480px; margin: 20px;
+  border-top: 3px solid var(--sage);
+  transform: translateY(12px); transition: transform .28s;
+}
+#cookie-modal.open .cm-box { transform: none; }
+.cm-head { padding: 28px 28px 0; }
+.cm-head h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.35rem; color: var(--ink);
+}
+.cm-head p { font-size: .8rem; color: var(--dim); margin-top: 6px; line-height: 1.55; }
+.cm-body { padding: 20px 28px; display: flex; flex-direction: column; gap: 0; }
+.cm-opt {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border);
+}
+.cm-opt:last-of-type { border-bottom: none; }
+.cm-opt-lbl strong { font-size: .86rem; font-weight: 500; color: var(--ink); display: block; margin-bottom: 3px; }
+.cm-opt-lbl span { font-size: .77rem; color: var(--dim); line-height: 1.5; }
+.toggle2 { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+.toggle2 input { opacity: 0; width: 0; height: 0; }
+.t-track {
+  position: absolute; inset: 0; background: var(--paper2);
+  border: 1px solid var(--border2); cursor: pointer; transition: .22s;
+}
+.t-track::after {
+  content: ''; position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; background: var(--mono);
+  transition: transform .22s, background .22s;
+}
+.toggle2 input:checked + .t-track { background: rgba(74,124,89,.15); border-color: var(--sage); }
+.toggle2 input:checked + .t-track::after { transform: translateX(18px); background: var(--sage); }
+.toggle2 input:disabled + .t-track { opacity: .45; cursor: not-allowed; }
+.cm-foot {
+  padding: 16px 28px 24px;
+  display: flex; justify-content: flex-end; gap: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  #hero,#sobre,#contactos { grid-template-columns: 1fr; }
+  .hero-right { min-height: 400px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .sol-grid { grid-template-columns: 1fr 1fr; }
+  .soc-grid { grid-template-columns: 1fr 1fr; }
+  .setores-grid { grid-template-columns: repeat(2,1fr); }
+  nav { padding: 0 24px; }
+  .nav-center { display: none; }
+  .ins-grid { grid-template-columns: 1fr; }
+}
+@media(max-width:600px){
+  nav { padding: 0 20px; }
+  .hero-left,.sobre-left,.sobre-right,.contact-left,.contact-right { padding: 48px 24px; }
+  #solucoes,#setores,#insights,#social,footer { padding-left: 24px; padding-right: 24px; }
+  .sol-grid,.soc-grid,.setores-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .newsletter { padding: 28px 24px; }
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form input { width: 100%; }
+  .cb-inner { padding: 16px 20px; }
+  .form-row2 { grid-template-columns: 1fr; }
+  .hero-numbers { gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-sq"><span>NX</span></div>
+    <span class="logo-name">NEXARIS</span>
+  </a>
+  <ul class="nav-center">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#solucoes">Soluções</a></li>
+    <li><a href="#setores">Setores</a></li>
+    <li><a href="#insights">Insights</a></li>
+    <li><a href="#social">Redes</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#contactos" class="nav-btn">Fale connosco</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-eyebrow">Consultoria orientada a impacto</div>
+      <h1 class="hero-h1">Building<br>the <em>Future</em><br>of Business</h1>
+      <p class="hero-sub">Ligamos estratégia, sustentabilidade e execução para transformar ambição em resultados reais. Utilities, indústria e setor público.</p>
+      <div class="hero-actions">
+        <a href="#contactos" class="btn-solid">Fale connosco <span>→</span></a>
+        <a href="#solucoes" class="btn-line">Ver soluções</a>
+      </div>
+    </div>
+    <div class="hero-numbers">
+      <div class="hero-num"><span class="hero-num-val">8+</span><span class="hero-num-lbl">Setores</span></div>
+      <div class="hero-num"><span class="hero-num-val">360°</span><span class="hero-num-lbl">Abordagem</span></div>
+      <div class="hero-num"><span class="hero-num-val">PT·EU</span><span class="hero-num-lbl">Mercados</span></div>
+      <div class="hero-num"><span class="hero-num-val">ESG</span><span class="hero-num-lbl">Certificado</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-top">
+      <div class="hero-grid-bg"></div>
+      <div class="hero-card">
+        <div class="hero-card-tag">Áreas de atuação</div>
+        <ul class="hero-card-list">
+          <li>Estratégia & Operações Empresariais</li>
+          <li>ESG & Sustentabilidade Corporativa</li>
+          <li>Transformação Digital & Cibersegurança</li>
+          <li>Internacionalização & Diplomacia</li>
+          <li>Inteligência Empresarial & Open Banking</li>
+        </ul>
+      </div>
+    </div>
+    <div class="hero-right-bottom">
+      <div class="hero-tag-row">
+        <span class="htag">RGPD</span>
+        <span class="htag">ISO 27001</span>
+        <span class="htag">ESG</span>
+        <span class="htag">PSD2</span>
+        <span class="htag">PT2030</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Estratégia</span><span class="sep"> / </span>
+    <span>Sustentabilidade</span><span class="sep"> / </span>
+    <span>Transformação Digital</span><span class="sep"> / </span>
+    <span>ESG</span><span class="sep"> / </span>
+    <span>Open Banking</span><span class="sep"> / </span>
+    <span>Internacionalização</span><span class="sep"> / </span>
+    <span>Cibersegurança</span><span class="sep"> / </span>
+    <span>Fundos Comunitários</span><span class="sep"> / </span>
+    <span>Estratégia</span><span class="sep"> / </span>
+    <span>Sustentabilidade</span><span class="sep"> / </span>
+    <span>Transformação Digital</span><span class="sep"> / </span>
+    <span>ESG</span><span class="sep"> / </span>
+    <span>Open Banking</span><span class="sep"> / </span>
+    <span>Internacionalização</span><span class="sep"> / </span>
+    <span>Cibersegurança</span><span class="sep"> / </span>
+    <span>Fundos Comunitários</span><span class="sep"> / </span>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre-left reveal">
+    <div class="section-label">Quem somos</div>
+    <h2 class="section-h2">Hub de <em>Transformação</em><br>e Desenvolvimento</h2>
+    <p class="sobre-text">Somos um hub de consultoria multidisciplinar com especial foco em utilities, indústria, serviços, banca e finanças. Promovemos inovação como ferramenta de impacto real e transformação consciente dos modelos de negócio.<br><br>Acreditamos na força das redes, das parcerias e da partilha de conhecimento para construir soluções mais eficazes e duradouras.</p>
+    <div class="sobre-pills">
+      <span class="sobre-pill">Multidisciplinar</span>
+      <span class="sobre-pill">Resultados Mensuráveis</span>
+      <span class="sobre-pill">Rede Internacional</span>
+      <span class="sobre-pill">Confiança & Transparência</span>
+      <span class="sobre-pill">ESG Certificado</span>
+      <span class="sobre-pill">Inovação Consciente</span>
+    </div>
+  </div>
+  <div class="sobre-right reveal">
+    <div class="section-label" style="color:var(--sage)">Os nossos princípios</div>
+    <div class="sobre-values">
+      <div class="sobre-val-item">
+        <span class="sobre-val-num">01</span>
+        <div class="sobre-val-text"><strong>Impacto mensurável</strong><span>Cada projeto é avaliado pelos resultados concretos que gera para o cliente e o ecossistema.</span></div>
+      </div>
+      <div class="sobre-val-item">
+        <span class="sobre-val-num">02</span>
+        <div class="sobre-val-text"><strong>Rede e colaboração</strong><span>Trabalhamos em parceria com especialistas, instituições e redes internacionais.</span></div>
+      </div>
+      <div class="sobre-val-item">
+        <span class="sobre-val-num">03</span>
+        <div class="sobre-val-text"><strong>Transparência total</strong><span>Comunicação clara, honesta e orientada à confiança em todas as fases do projeto.</span></div>
+      </div>
+      <div class="sobre-val-item">
+        <span class="sobre-val-num">04</span>
+        <div class="sobre-val-text"><strong>Inovação com propósito</strong><span>Tecnologia e criatividade ao serviço de objetivos sustentáveis e humanos.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section id="solucoes">
+  <div class="sol-top reveal">
+    <div>
+      <div class="section-label">O que fazemos</div>
+      <h2 class="section-h2">Soluções que <em>transformam</em><br>desafios em resultados</h2>
+    </div>
+    <a href="#contactos" class="btn-line">Falar com especialista →</a>
+  </div>
+  <div class="sol-grid reveal">
+    <div class="sol-item">
+      <div class="sol-n">01 — Estratégia</div>
+      <h3 class="sol-h3">Estratégia & Operações</h3>
+      <p class="sol-p">Gestão da mudança para ganhos de eficiência, Fundos Comunitários, Gestão de Projetos e M&A.</p>
+      <a href="#" class="sol-more">Saiba mais →</a>
+    </div>
+    <div class="sol-item">
+      <div class="sol-n">02 — Sustentabilidade</div>
+      <h3 class="sol-h3">ESG & Sustentabilidade</h3>
+      <p class="sol-p">Relatórios ESG, Estratégias de Sustentabilidade, Água, Energia e Resíduos.</p>
+      <a href="#" class="sol-more">Saiba mais →</a>
+    </div>
+    <div class="sol-item">
+      <div class="sol-n">03 — Internacional</div>
+      <h3 class="sol-h3">Internacionalização & Diplomacia</h3>
+      <p class="sol-p">Entrada em mercados, parcerias e representação institucional com rede internacional.</p>
+      <a href="#" class="sol-more">Saiba mais →</a>
+    </div>
+    <div class="sol-item">
+      <div class="sol-n">04 — Digital</div>
+      <h3 class="sol-h3">Digitalização & Segurança</h3>
+      <p class="sol-p">Digitalização das organizações, Estratégia digital & AI, Soluções em Cibersegurança.</p>
+      <a href="#" class="sol-more">Saiba mais →</a>
+    </div>
+    <div class="sol-item">
+      <div class="sol-n">05 — Inteligência</div>
+      <h3 class="sol-h3">Inteligência Empresarial</h3>
+      <p class="sol-p">De dados a decisões: análises avançadas e relatórios inteligentes que potenciam estratégia.</p>
+      <a href="#" class="sol-more">Saiba mais →</a>
+    </div>
+    <div class="sol-item">
+      <div class="sol-n">06 — Finanças</div>
+      <h3 class="sol-h3">Open Banking</h3>
+      <p class="sol-p">Nova fase na área financeira, regulamentada pela Diretiva PSD2 da Autoridade Bancária Europeia.</p>
+      <a href="#" class="sol-more">Saiba mais →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SETORES -->
+<section id="setores">
+  <div class="reveal">
+    <div class="section-label">Onde atuamos</div>
+    <h2 class="section-h2">Experiência em<br><em>múltiplos</em> setores</h2>
+  </div>
+  <div class="setores-grid reveal">
+    <div class="setor-item act" onclick="setActive(this)">
+      <div class="setor-icon">💧</div>
+      <div class="setor-name">Água & Resíduos</div>
+      <div class="setor-tag-lbl">Utilities</div>
+    </div>
+    <div class="setor-item" onclick="setActive(this)">
+      <div class="setor-icon">🏦</div>
+      <div class="setor-name">Banca & Finanças</div>
+      <div class="setor-tag-lbl">Financeiro</div>
+    </div>
+    <div class="setor-item" onclick="setActive(this)">
+      <div class="setor-icon">⚡</div>
+      <div class="setor-name">Energia</div>
+      <div class="setor-tag-lbl">Utilities</div>
+    </div>
+    <div class="setor-item" onclick="setActive(this)">
+      <div class="setor-icon">🏭</div>
+      <div class="setor-name">Indústria Transformadora</div>
+      <div class="setor-tag-lbl">Indústria</div>
+    </div>
+    <div class="setor-item" onclick="setActive(this)">
+      <div class="setor-icon">🌐</div>
+      <div class="setor-name">Mercados Internacionais</div>
+      <div class="setor-tag-lbl">Internacional</div>
+    </div>
+    <div class="setor-item" onclick="setActive(this)">
+      <div class="setor-icon">🏛</div>
+      <div class="setor-name">Sector Público</div>
+      <div class="setor-tag-lbl">Governo</div>
+    </div>
+    <div class="setor-item" onclick="setActive(this)">
+      <div class="setor-icon">💡</div>
+      <div class="setor-name">Tecnologia & Inovação</div>
+      <div class="setor-tag-lbl">Tech</div>
+    </div>
+    <div class="setor-item" onclick="setActive(this)">
+      <div class="setor-icon">✈️</div>
+      <div class="setor-name">Turismo & Lazer</div>
+      <div class="setor-tag-lbl">Turismo</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section id="insights">
+  <div class="ins-top reveal">
+    <div>
+      <div class="section-label">Conhecimento</div>
+      <h2 class="section-h2">Insights <em>NEXARIS</em></h2>
+    </div>
+    <a href="#" class="btn-line">Ver todos →</a>
+  </div>
+  <div class="ins-grid reveal">
+    <a href="#" class="ins-featured">
+      <div class="ins-img" style="background:linear-gradient(135deg,var(--ink2),var(--forest));">
+        🌍
+        <span class="ins-img-tag">Em destaque</span>
+      </div>
+      <div class="ins-body">
+        <div class="ins-cat">ESG & Sustentabilidade</div>
+        <h3 class="ins-h3">O Futuro das Empresas Portuguesas face às Diretivas ESG Europeias em 2025</h3>
+        <p class="ins-excerpt">As novas exigências de reporte não-financeiro da CSRD transformam a forma como as organizações comunicam o seu impacto ambiental e de governance.</p>
+        <div class="ins-meta"><span>Março 2025</span><span>8 min leitura →</span></div>
+      </div>
+    </a>
+    <div class="ins-stack">
+      <a href="#" class="ins-small">
+        <div class="ins-cat">Digital & AI</div>
+        <h3 class="ins-h3">Inteligência Artificial na Tomada de Decisão Empresarial</h3>
+        <div class="ins-meta"><span>Fev 2025</span><span>5 min →</span></div>
+      </a>
+      <a href="#" class="ins-small">
+        <div class="ins-cat">Fundos Comunitários</div>
+        <h3 class="ins-h3">Guia Prático para Acesso a Fundos PT2030</h3>
+        <div class="ins-meta"><span>Jan 2025</span><span>6 min →</span></div>
+      </a>
+      <a href="#" class="ins-small">
+        <div class="ins-cat">Open Banking</div>
+        <h3 class="ins-h3">PSD2 e o Novo Paradigma Financeiro Europeu</h3>
+        <div class="ins-meta"><span>Dez 2024</span><span>4 min →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social">
+  <div class="social-top-row reveal">
+    <div>
+      <div class="section-label">Redes sociais</div>
+      <h2 class="section-h2">Siga a <em>NEXARIS</em></h2>
+    </div>
+  </div>
+  <div class="soc-grid reveal">
+    <a href="https://linkedin.com" target="_blank" rel="noopener" class="soc-card">
+      <div class="soc-header">
+        <span class="soc-name">LinkedIn</span>
+        <div class="soc-count"><strong>2.4K</strong><span>Seguidores</span></div>
+      </div>
+      <p class="soc-desc">Artigos técnicos, cases de sucesso e networking B2B.</p>
+      <div class="soc-thumbs"><div class="soc-th"></div><div class="soc-th"></div><div class="soc-th"></div></div>
+      <span class="soc-handle">company/nexaris</span>
+    </a>
+    <a href="https://x.com" target="_blank" rel="noopener" class="soc-card">
+      <div class="soc-header">
+        <span class="soc-name">X / Twitter</span>
+        <div class="soc-count"><strong>890</strong><span>Seguidores</span></div>
+      </div>
+      <p class="soc-desc">Notícias do mercado e perspetivas em tempo real.</p>
+      <div class="soc-thumbs"><div class="soc-th"></div><div class="soc-th"></div><div class="soc-th"></div></div>
+      <span class="soc-handle">@nexaris_pt</span>
+    </a>
+    <a href="https://instagram.com" target="_blank" rel="noopener" class="soc-card">
+      <div class="soc-header">
+        <span class="soc-name">Instagram</span>
+        <div class="soc-count"><strong>1.1K</strong><span>Seguidores</span></div>
+      </div>
+      <p class="soc-desc">Bastidores da equipa, eventos e cultura organizacional.</p>
+      <div class="soc-thumbs"><div class="soc-th"></div><div class="soc-th"></div><div class="soc-th"></div></div>
+      <span class="soc-handle">@nexaris.consulting</span>
+    </a>
+    <a href="https://youtube.com" target="_blank" rel="noopener" class="soc-card">
+      <div class="soc-header">
+        <span class="soc-name">YouTube</span>
+        <div class="soc-count"><strong>320</strong><span>Subscritores</span></div>
+      </div>
+      <p class="soc-desc">Webinars, entrevistas com especialistas e conteúdo formativo.</p>
+      <div class="soc-thumbs"><div class="soc-th"></div><div class="soc-th"></div><div class="soc-th"></div></div>
+      <span class="soc-handle">NEXARIS Consulting</span>
+    </a>
+  </div>
+  <div class="newsletter reveal">
+    <div class="newsletter-txt">
+      <h3>Newsletter <em>NEXARIS</em></h3>
+      <p>Receba os melhores insights diretamente na sua caixa de entrada. Sem spam.</p>
+    </div>
+    <div class="newsletter-form">
+      <input type="email" id="nl-email" placeholder="O seu email profissional">
+      <button type="button" onclick="subscribeNL(this)">Subscrever →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contactos">
+  <div class="contact-left reveal">
+    <div>
+      <div class="section-label">Fale connosco</div>
+      <h2 class="section-h2">Pronto para <em>transformar</em><br>o seu negócio?</h2>
+      <p class="section-lead">A nossa equipa está disponível para discutir os seus desafios e apresentar as soluções mais adequadas.</p>
+    </div>
+    <div class="contact-details">
+      <div class="c-detail">
+        <div class="c-icon">✉</div>
+        <div><div class="c-label">Email</div><div class="c-val">info@nexaris.pt</div></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon">📍</div>
+        <div><div class="c-label">Escritórios</div><div class="c-val">Lisboa · Porto</div></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon">🕐</div>
+        <div><div class="c-label">Horário</div><div class="c-val">Segunda–Sexta, 9h–18h</div></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon">🌍</div>
+        <div><div class="c-label">Mercados</div><div class="c-val">Portugal · UE · Internacional</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-right reveal">
+    <div class="contact-form">
+
+      <div class="rgpd-note">
+        🔒 Os seus dados são tratados com total confidencialidade, em conformidade com o <strong>RGPD</strong>. Usados exclusivamente para responder à sua mensagem. <a href="#">Política de Privacidade</a> · <a href="#">Termos de Serviço</a>.
+      </div>
+
+      <div class="form-row2">
+        <div class="f-group">
+          <label>Nome</label>
+          <input type="text" placeholder="João Silva">
+        </div>
+        <div class="f-group">
+          <label>Email</label>
+          <input type="email" placeholder="joao@empresa.pt">
+        </div>
+      </div>
+      <div class="form-row2">
+        <div class="f-group">
+          <label>Empresa</label>
+          <input type="text" placeholder="Nome da empresa">
+        </div>
+        <div class="f-group">
+          <label>Área de interesse</label>
+          <select>
+            <option value="">Selecionar...</option>
+            <option>Estratégia & Operações</option>
+            <option>ESG & Sustentabilidade</option>
+            <option>Digitalização & Segurança</option>
+            <option>Internacionalização</option>
+            <option>Open Banking</option>
+            <option>Outro</option>
+          </select>
+        </div>
+      </div>
+      <div class="f-group">
+        <label>Mensagem</label>
+        <textarea placeholder="Descreva brevemente o seu desafio ou necessidade..."></textarea>
+      </div>
+
+      <!-- Captcha -->
+      <div class="captcha-row">
+        <div class="cap-left">
+          <div class="cap-box" id="capBox" onclick="doCaptcha()">
+            <div class="cap-spinner"></div>
+            <svg class="cap-tick" width="12" height="10" viewBox="0 0 12 10" fill="none">
+              <polyline points="1,5 5,9 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="cap-label" id="capLbl" onclick="doCaptcha()">Não sou um robô</span>
+        </div>
+        <div class="cap-brand"><span>🛡</span><span>Verificação</span><span>segura</span></div>
+      </div>
+
+      <!-- Consentimento -->
+      <div class="consent-row">
+        <input type="checkbox" id="consent" onchange="checkReady()">
+        <label for="consent">
+          Aceito que a NEXARIS trate os meus dados pessoais para resposta a esta mensagem, em conformidade com a <a href="#">Política de Privacidade</a> e o RGPD. <span style="color:var(--forest)">*</span>
+        </label>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" disabled onclick="submitForm(this)">
+        Enviar mensagem <span>→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <div class="logo-sq"><span>NX</span></div>
+        <span class="logo-name">NEXARIS</span>
+      </a>
+      <p>Consultoria orientada a impacto — estratégia, sustentabilidade e transformação digital para organizações públicas e privadas.</p>
+      <div class="footer-soc">
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="X">𝕏</a>
+        <a href="#" title="Instagram">ig</a>
+        <a href="#" title="YouTube">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Soluções</h4>
+      <ul>
+        <li><a href="#">Estratégia & Operações</a></li>
+        <li><a href="#">ESG & Sustentabilidade</a></li>
+        <li><a href="#">Internacionalização</a></li>
+        <li><a href="#">Digitalização & AI</a></li>
+        <li><a href="#">Open Banking</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#">Sobre a NEXARIS</a></li>
+        <li><a href="#">A nossa equipa</a></li>
+        <li><a href="#">Parcerias</a></li>
+        <li><a href="#">Carreiras</a></li>
+        <li><a href="#">Insights</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Política de Privacidade</a></li>
+        <li><a href="#">Termos de Serviço</a></li>
+        <li><a href="#">Política de Cookies</a></li>
+        <li><a href="#">RGPD</a></li>
+        <li><a href="#" onclick="openCM();return false;">Gerir cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NEXARIS Consulting · Lisboa · Porto · Todos os direitos reservados</span>
+    <span>Feito com precisão em Portugal</span>
+  </div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <div class="cb-inner">
+    <div class="cb-ico">🍪</div>
+    <div class="cb-txt">
+      <strong>Este site utiliza cookies</strong>
+      <p>Usamos cookies para melhorar a sua experiência, analisar o tráfego e personalizar conteúdo. Consulte a nossa <a href="#">Política de Cookies</a> e <a href="#">Política de Privacidade</a> (RGPD).</p>
+    </div>
+    <div class="cb-btns">
+      <button class="cb-btn cb-config" onclick="openCM()">Configurar</button>
+      <button class="cb-btn cb-reject" onclick="rejectCookies()">Rejeitar</button>
+      <button class="cb-btn cb-accept" onclick="acceptCookies()">Aceitar tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIE MODAL -->
+<div id="cookie-modal">
+  <div class="cm-box">
+    <div class="cm-head">
+      <h3>Preferências de Cookies</h3>
+      <p>Personalize quais cookies aceita. Os cookies essenciais são sempre ativados pois são necessários para o funcionamento do site.</p>
+    </div>
+    <div class="cm-body">
+      <div class="cm-opt">
+        <div class="cm-opt-lbl"><strong>Cookies Essenciais</strong><span>Necessários para o funcionamento básico. Não podem ser desativados.</span></div>
+        <label class="toggle2"><input type="checkbox" checked disabled><div class="t-track"></div></label>
+      </div>
+      <div class="cm-opt">
+        <div class="cm-opt-lbl"><strong>Cookies Analíticos</strong><span>Ajudam-nos a entender como os visitantes usam o site (Google Analytics, etc.).</span></div>
+        <label class="toggle2"><input type="checkbox" id="ckA"><div class="t-track"></div></label>
+      </div>
+      <div class="cm-opt">
+        <div class="cm-opt-lbl"><strong>Cookies de Marketing</strong><span>Utilizados para mostrar anúncios e campanhas relevantes.</span></div>
+        <label class="toggle2"><input type="checkbox" id="ckM"><div class="t-track"></div></label>
+      </div>
+      <div class="cm-opt">
+        <div class="cm-opt-lbl"><strong>Cookies de Preferências</strong><span>Guardam preferências de idioma, região e personalização.</span></div>
+        <label class="toggle2"><input type="checkbox" id="ckP" checked><div class="t-track"></div></label>
+      </div>
+    </div>
+    <div class="cm-foot">
+      <button class="cb-btn cb-reject" onclick="closeCM()">Cancelar</button>
+      <button class="cb-btn cb-accept" onclick="savePrefs()">Guardar preferências</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// REVEAL
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// SETORES
+function setActive(el){
+  document.querySelectorAll('.setor-item').forEach(i=>i.classList.remove('act'));
+  el.classList.add('act');
+}
+
+// SANITIZE
+document.querySelectorAll('input[type=text],input[type=email],textarea').forEach(el=>{
+  el.addEventListener('input',function(){ this.value=this.value.replace(/[<>]/g,''); });
+});
+
+// CAPTCHA
+let capDone=false;
+function doCaptcha(){
+  if(capDone) return;
+  const b=document.getElementById('capBox'), l=document.getElementById('capLbl');
+  b.classList.add('checking'); l.textContent='A verificar...';
+  setTimeout(()=>{
+    b.classList.remove('checking'); b.classList.add('checked');
+    l.textContent='Verificado ✓'; l.classList.add('done');
+    capDone=true; checkReady();
+  },1500);
+}
+function checkReady(){
+  document.getElementById('submitBtn').disabled=!(capDone && document.getElementById('consent').checked);
+}
+function submitForm(btn){
+  if(!capDone||!document.getElementById('consent').checked) return;
+  btn.textContent='Mensagem enviada ✓';
+  btn.style.opacity='.6'; btn.disabled=true;
+}
+
+// NEWSLETTER
+function subscribeNL(btn){
+  const v=document.getElementById('nl-email').value;
+  if(!v||!v.includes('@')){ alert('Por favor insira um email válido.'); return; }
+  btn.textContent='Subscrito ✓'; btn.style.opacity='.65'; btn.disabled=true;
+}
+
+// COOKIES
+function showBanner(){
+  if(!localStorage.getItem('nx_ck'))
+    setTimeout(()=>document.getElementById('cookie-banner').classList.add('show'),1200);
+}
+function hideBanner(){
+  document.getElementById('cookie-banner').classList.remove('show');
+  closeCM();
+}
+function acceptCookies(){ localStorage.setItem('nx_ck','all'); hideBanner(); }
+function rejectCookies(){ localStorage.setItem('nx_ck','essential'); hideBanner(); }
+function openCM(){ document.getElementById('cookie-modal').classList.add('open'); }
+function closeCM(){ document.getElementById('cookie-modal').classList.remove('open'); }
+function savePrefs(){
+  localStorage.setItem('nx_ck',JSON.stringify({
+    a:document.getElementById('ckA').checked,
+    m:document.getElementById('ckM').checked,
+    p:document.getElementById('ckP').checked
+  }));
+  hideBanner();
+}
+document.getElementById('cookie-modal').addEventListener('click',e=>{
+  if(e.target===document.getElementById('cookie-modal')) closeCM();
+});
+showBanner();
+</script>
+</body>
+</html>
